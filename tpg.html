@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopUpGame | Top Up Resmi & Terpercaya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #222;
+            line-height: 1.5;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+
+        /* Header */
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 99;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .logo small {
+            font-size: 12px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        /* Halaman */
+        .halaman {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .halaman.aktif {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .judul-bagian {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 20px 0 15px;
+        }
+
+        .sub-judul {
+            font-size: 17px;
+            font-weight: 500;
+            margin: 25px 0 12px;
+        }
+
+        /* Grid Game */
+        .grid-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .kartu-game {
+            background: #fff;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .kartu-game:hover {
+            border-color: #e63946;
+            transform: translateY(-3px);
+        }
+
+        .kartu-game img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            margin-bottom: 8px;
+        }
+
+        .kartu-game p {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Form ID */
+        .form-id {
+            background: #fff;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .form-id label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-id input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn.cek-id {
+            background: #e63946;
+            color: white;
+            width: 100%;
+        }
+
+        .btn.cek-id:hover {
+            background: #d62839;
+        }
+
+        /* Tombol Kembali */
+        .btn-kembali {
+            background: none;
+            border: none;
+            color: #555;
+            font-size: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            padding: 0;
+        }
+
+        .btn-kembali:hover {
+            color: #e63946;
+        }
+
+        /* Tab */
+        .tab-pilihan {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            background: #eee;
+            cursor: pointer;
+        }
+
+        .tab.aktif {
+            background: #e63946;
+            color: white;
+        }
+
+        /* Grid Nominal & Penawaran */
+        .grid-nominal, .grid-penawaran {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .kartu-nominal, .kartu-penawaran {
+            background: #fff;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .kartu-nominal:hover, .kartu-penawaran:hover {
+            border-color: #e63946;
+            box-shadow: 0 3px 8px rgba(230, 57, 70, 0.15);
+        }
+
+        .kartu-nominal p, .kartu-penawaran p {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .kartu-penawaran img {
+            width: 60px;
+            margin-bottom: 8px;
+        }
+
+        /* Metode Pembayaran */
+        .info-bayar {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .grid-bayar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .kartu-bayar {
+            background: #fff;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .kartu-bayar:hover, .kartu-bayar.terpilih {
+            border-color: #e63946;
+            box-shadow: 0 3px 8px rgba(230, 57, 70, 0.15);
+        }
+
+        .label-promo {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ffc107;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .logo-bayar {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .logo-bayar.dana { color: #0066cc; }
+        .logo-bayar.ovo { color: #5b0099; }
+        .logo-bayar.gopay { color: #009944; }
+
+        .ringkasan-bayar {
+            background: #fff;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .ringkasan-bayar p {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .ringkasan-bayar h3 {
+            font-size: 22px;
+            margin: 8px 0 15px;
+            color: #e63946;
+        }
+
+        .btn-lanjut {
+            width: 100%;
+            padding: 14px;
+            background: #e63946;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-lanjut:hover {
+            background: #d62839;
+        }
+
+        /* Ringkasan Pesanan */
+        .kotak-ringkasan {
+            background: #fff;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .baris {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .input-promo {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .input-promo input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .btn-gunakan {
+            padding: 12px 18px;
+            background: #ffc107;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-besar {
+            width: 100%;
+            padding: 16px;
+            background: #e63946;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-besar:hover {
+            background: #d62839;
+        }
+
+        /* Responsif HP */
+        @media(max-width: 500px) {
+            .grid-game, .grid-nominal, .grid-penawaran, .grid-bayar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <span class="garena-logo">🔥</span>
+            <h1>TopUpGame <small>Top Up Resmi & Terpercaya</small></h1>
+        </div>
+    </div>
+</header>
+
+<!-- Halaman 1: Pilih Game -->
+<section id="halaman1" class="halaman aktif">
+    <div class="container">
+        <h2 class="judul-bagian">Pilih Game</h2>
+        <div class="grid-game">
+            <div class="kartu-game" onclick="pilihGame('Free Fire', 'freefire')">
+                <img src="https://upload.wikimedia.org/wikipedia/id/thumb/7/77/Free_Fire_logo.svg/200px-Free_Fire_logo.svg.png" alt="Free Fire">
+                <p>Free Fire</p>
+            </div>
+            <div class="kartu-game" onclick="pilihGame('Delta Force', 'deltaforce')">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7f/Delta_Force_2024_logo.png/200px-Delta_Force_2024_logo.png" alt="Delta Force">
+                <p>Delta Force</p>
+            </div>
+            <div class="kartu-game" onclick="pilihGame('Garena Undawn', 'undawn')">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Undawn_game_cover.jpg/200px-Undawn_game_cover.jpg" alt="Garena Undawn">
+                <p>Garena Undawn</p>
+            </div>
+            <div class="kartu-game" onclick="pilihGame('Call of Duty Mobile', 'codm')">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Call_of_Duty_logo.svg/200px-Call_of_Duty_logo.svg.png" alt="Call of Duty">
+                <p>Call of Duty</p>
+            </div>
+        </div>
+
+        <!-- Form ID Akun -->
+        <div id="formIdAkun" class="form-id" style="display: none;">
+            <h3>Login / Masukkan Data Akun</h3>
+            <label>Player ID</label>
+            <input type="text" id="playerId" placeholder="Isi Player ID disini">
+            <button class="btn cek-id" onclick="cekId()">Cek ID</button>
+        </div>
+    </div>
+</section>
+
+<!-- Halaman 2: Pilih Nominal -->
+<section id="halaman2" class="halaman">
+    <div class="container">
+        <button class="btn-kembali" onclick="kembaliKeHalaman1()">← Kembali</button>
+        <h2 id="judulGameDipilih" class="judul-bagian"></h2>
+
+        <div class="tab-pilihan">
+            <span class="tab aktif">Pembelian</span>
+            <span class="tab">Redeem Voucher</span>
+        </div>
+
+        <h3 class="sub-judul">Nominal Top Up</h3>
+        <div class="grid-nominal" id="daftarNominal">
+            <!-- Nominal akan dimuat otomatis -->
+        </div>
+
+        <h3 class="sub-judul">Penawaran Spesial</h3>
+        <div class="grid-penawaran" id="daftarPenawaran">
+            <div class="kartu-penawaran" onclick="pilihMember('Member Mingguan', 30000, 100, 5)">
+                <img src="https://i.ibb.co/312v80v/mingguan.png" alt="Member Mingguan">
+                <p>Member Mingguan</p>
+            </div>
+            <div class="kartu-penawaran" onclick="pilihMember('Mingguan Lite', 15000, 50, 2)">
+                <img src="https://i.ibb.co/312v80v/mingguan-lite.png" alt="Member Mingguan Lite">
+                <p>Mingguan Lite</p>
+            </div>
+            <div class="kartu-penawaran" onclick="pilihMember('Member Bulanan', 100000, 500, 20)">
+                <img src="https://i.ibb.co/312v80v/bulanan.png" alt="Member Bulanan">
+                <p>Member Bulanan</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Halaman 3: Pilih Metode Pembayaran -->
+<section id="halaman3" class="halaman">
+    <div class="container">
+        <button class="btn-kembali" onclick="kembaliKeHalaman2()">← Kembali</button>
+        <h2 class="judul-bagian">Metode Pembayaran</h2>
+        <p class="info-bayar">Total yang akan dibayar: <strong id="infoNominal">💎 0</strong></p>
+
+        <div class="grid-bayar">
+            <div class="kartu-bayar" onclick="pilihMetode('DANA')">
+                <div class="label-promo">PROMO</div>
+                <div class="logo-bayar dana">DANA</div>
+                <p>Rp <span id="hargaDANA">0</span> <br><small>Bonus +<span id="bonusDANA">0</span></small></p>
+            </div>
+            <div class="kartu-bayar" onclick="pilihMetode('OVO')">
+                <div class="label-promo">PROMO</div>
+                <div class="logo-bayar ovo">OVO</div>
+                <p>Rp <span id="hargaOVO">0</span> <br><small>Bonus +<span id="bonusOVO">0</span></small></p>
+            </div>
+            <div class="kartu-bayar" onclick="pilihMetode('GoPay')">
+                <div class="label-promo">PROMO</div>
+                <div class="logo-bayar gopay">GoPay</div>
+                <p>Rp <span id="hargaGoPay">0</span> <br><small>Bonus +<span id="bonusGoPay">0</span></small></p>
+            </div>
+        </div>
+
+        <div class="ringkasan-bayar">
+            <p>Jumlah: <span id="totalDiamond">0 💎</span></p>
+            <h3>Total Bayar: Rp <span id="hargaTotal">0</span></h3>
+            <button class="btn-lanjut" onclick="lanjutKeKonfirmasi()">Lanjut</button>
+        </div>
+    </div>
+</section>
+
+<!-- Halaman 4: Konfirmasi Pesanan -->
+<section id="halaman4" class="halaman">
+    <div class="container">
+        <button class="btn-kembali" onclick="kembaliKeHalaman3()">← Kembali</button>
+        <h2 class="judul-bagian">Ringkasan Pesanan</h2>
+
+        <div class="kotak-ringkasan">
+            <div class="baris">
+                <span>Nominal Total</span>
+                <span><strong id="ringkasanDiamond">0 💎</strong></span>
+            </div>
+            <div class="baris">
+                <span>Nominal Awal</span>
+                <span id="nominalAwal">0 💎</span>
+            </div>
+            <div class="baris">
+                <span>+ Bonus Spesial</span>
+                <span id="bonusAwal">0 💎</span>
+            </div>
+            <div class="baris">
+                <span>Harga</span>
+                <span><strong>Rp <span id="hargaRingkasan">0</span></strong></span>
+            </div>
+            <div class="baris">
+                <span>Metode Pembayaran</span>
+                <span id="metodeTerpilih">-</span>
+            </div>
+            <div class="baris">
+                <span>Player ID</span>
+                <span id="idTerpilih">-</span>
+            </div>
+        </div>
+
+        <div class="input-promo">
+            <label>Kode Promo (Opsional)</label>
+            <input type="text" id="kodePromo" placeholder="Masukkan kode promo jika ada">
+            <button class="btn-gunakan">Gunakan</button>
+        </div>
+
+        <button class="btn-besar" onclick="prosesPembayaran()">Lanjutkan ke Pembayaran</button>
+    </div>
+</section>
+
+<script>
+// Data Penyimpanan Sementara
+let dataPesanan = {
+    game: "",
+    id: "",
+    jenis: "",
+    jumlahInti: 0,
+    bonus: 0,
+    harga: 0,
+    metode: ""
+};
+
+// Data Nominal Free Fire SESUAI GAMBAR
+const daftarNominalFF = [
+    { jml: 5, harga: 1500, bonus: 1 },
+    { jml: 12, harga: 3500, bonus: 1 },
+    { jml: 50, harga: 8000, bonus: 2 },
+    { jml: 70, harga: 11000, bonus: 3 },
+    { jml: 91, harga: 14500, bonus: 3 },
+    { jml: 140, harga: 21000, bonus: 4 },
+    { jml: 355, harga: 52000, bonus: 8 },
+    { jml: 720, harga: 102000, bonus: 12 },
+    { jml: 1450, harga: 205000, bonus: 25 },
+    { jml: 2180, harga: 305000, bonus: 35 },
+    { jml: 3640, harga: 505000, bonus: 50 },
+    { jml: 7290, harga: 995000, bonus: 90 }
+];
+
+// Pilih Game
+function pilihGame(namaGame, kode) {
+    dataPesanan.game = namaGame;
+    document.getElementById("judulGameDipilih").textContent = namaGame;
+    document.getElementById("formIdAkun").style.display = "block";
+}
+
+// Cek ID & Lanjut ke Halaman Nominal
+function cekId() {
+    const id = document.getElementById("playerId").value.trim();
+    if(!id) return alert("Masukkan Player ID terlebih dahulu!");
+    dataPesanan.id = id;
+
+    // Muat nominal jika Free Fire
+    if(dataPesanan.game === "Free Fire") {
+        let html = "";
+        daftarNominalFF.forEach(item => {
+            html += `<div class="kartu-nominal" onclick="pilihNominal(${item.jml}, ${item.harga}, ${item.bonus})">
+                        <p>💎 ${item.jml}</p>
+                        <small>Rp ${item.harga.toLocaleString('id-ID')}</small>
+                     </div>`;
+        });
+        document.getElementById("daftarNominal").innerHTML = html;
+    }
+
+    gantiHalaman("halaman2");
+}
+
+// Pilih Nominal Diamond
+function pilihNominal(jumlahInti, harga, bonus) {
+    dataPesanan.jenis = "Diamond";
+    dataPesanan.jumlahInti = jumlahInti;
+    dataPesanan.harga = harga;
+    dataPesanan.bonus = bonus;
+
+    updateInfoPembayaran();
+}
+
+// Pilih Paket Membership
+function pilihMember(namaPaket, harga, jumlahInti, bonus) {
+    dataPesanan.jenis = namaPaket;
+    dataPesanan.jumlahInti = jumlahInti;
+    dataPesanan.harga = harga;
+    dataPesanan.bonus = bonus;
+
+    updateInfoPembayaran();
+}
+
+// Perbarui Tampilan Halaman Pembayaran
+function updateInfoPembayaran() {
+    const total = dataPesanan.jumlahInti + dataPesanan.bonus;
+    document.getElementById("infoNominal").textContent = `${dataPesanan.jenis} • 💎 ${dataPesanan.jumlahInti} + ${dataPesanan.bonus} = ${total}`;
+    document.getElementById("hargaDANA").textContent = dataPesanan.harga.toLocaleString('id-ID');
+    document.getElementById("bonusDANA").textContent = dataPesanan.bonus;
+    document.getElementById("hargaOVO").textContent = dataPesanan.harga.toLocaleString('id-ID');
+    document.getElementById("bonusOVO").textContent = dataPesanan.bonus;
+    document.getElementById("hargaGoPay").textContent = dataPesanan.harga.toLocaleString('id-ID');
+    document.getElementById("bonusGoPay").textContent = dataPesanan.bonus;
+
+    gantiHalaman("halaman3");
+}
+
+// Pilih Metode Pembayaran
+function pilihMetode(namaMetode) {
+    document.querySelectorAll(".kartu-bayar").forEach(el => el.classList.remove("terpilih"));
+    event.currentTarget.classList.add("terpilih");
+
+    dataPesanan.metode = namaMetode;
+
+    const total = dataPesanan.jumlahInti + dataPesanan.bonus;
+    document.getElementById("totalDiamond").textContent = `${total} 💎`;
+    document.getElementById("hargaTotal").textContent = dataPesanan.harga.toLocaleString('id-ID');
+}
+
+// Lanjut ke Halaman Konfirmasi
+function lanjutKeKonfirmasi() {
+    if(!dataPesanan.metode) return alert("Pilih metode pembayaran terlebih dahulu!");
+
+    const total = dataPesanan.jumlahInti + dataPesanan.bonus;
+    document.getElementById("ringkasanDiamond").textContent = `${total} 💎`;
+    document.getElementById("nominalAwal").textContent = `${dataPesanan.jumlahInti} 💎`;
+    document.getElementById("bonusAwal").textContent = `${dataPesanan.bonus} 💎`;
+    document.getElementById("hargaRingkasan").textContent = dataPesanan.harga.toLocaleString('id-ID');
+    document.getElementById("metodeTerpilih").textContent = dataPesanan.metode;
+    document.getElementById("idTerpilih").textContent = dataPesanan.id;
+
+    gantiHalaman("halaman4");
+}
+
+// Proses Pembayaran & Buka Aplikasi
+function prosesPembayaran() {
+    alert(`Pesanan dikonfirmasi! Mengalihkan ke aplikasi ${dataPesanan.metode}...`);
+
+    // Tautan buka aplikasi
+    let tautan = "";
+    if(dataPesanan.metode === "DANA") tautan = "dana://";
+    if(dataPesanan.metode === "OVO") tautan = "ovo://";
+    if(dataPesanan.metode === "GoPay") tautan = "gopay://";
+
+    // Buka aplikasi
+    window.location.href = tautan;
+
+    // Kirim detail pesanan ke WA Admin
+    const pesan = `📥 PESANAN BARU
+🎮 Game: ${dataPesanan.game}
+📦 Jenis: ${dataPesanan.jenis}
+🆔 ID Akun: ${dataPesanan.id}
+💎 Jumlah: ${dataPesanan.jumlahInti} + ${dataPesanan.bonus} = ${dataPesanan.jumlahInti + dataPesanan.bonus}
+💰 Harga: Rp ${dataPesanan.harga.toLocaleString('id-ID')}
+💳 Metode: ${dataPesanan.metode}`;
+
+    const waLink = `https://wa.me/6281234567890?text=${encodeURIComponent(pesan)}`;
+    setTimeout(() => window.open(waLink, "_blank"), 1500);
+}
+
+// Fungsi Bantu Ganti Halaman
+function gantiHalaman(idHalaman) {
+    document.querySelectorAll(".halaman").forEach(el => el.classList.remove("aktif"));
+    document.getElementById(idHalaman).classList.add("aktif");
+}
+
+function kembaliKeHalaman1() { gantiHalaman("halaman1"); }
+function kembaliKeHalaman2() { gantiHalaman("halaman2"); }
+function kembaliKeHalaman3() { gantiHalaman("halaman3"); }
+</script>
+
+</body>
+</html>
